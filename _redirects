@@ -1,0 +1,11 @@
+# Netlify Redirects Configuration
+# Serve different index files based on domain
+
+# For fiapmatch.com domain - serve index-fiapmatch.html
+https://fiapmatch.com/* /index-fiapmatch.html 200!
+
+# For app.fiapmatch.com domain - serve index.html (default)
+https://app.fiapmatch.com/* /index.html 200!
+
+# Fallback - serve index.html for any other requests
+/* /index.html 200
