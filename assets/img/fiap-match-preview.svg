@@ -1,0 +1,66 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1E1E1E;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0D0D0D;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="pinkGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ED145B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF4081;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
+  
+  <!-- Animated Background Pattern -->
+  <circle cx="100" cy="100" r="3" fill="#ED145B" opacity="0.3">
+    <animate attributeName="opacity" values="0.3;0.8;0.3" dur="3s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="1100" cy="150" r="4" fill="#ED145B" opacity="0.4">
+    <animate attributeName="opacity" values="0.4;0.9;0.4" dur="4s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="200" cy="500" r="2" fill="#ED145B" opacity="0.2">
+    <animate attributeName="opacity" values="0.2;0.7;0.2" dur="5s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="1000" cy="450" r="3" fill="#ED145B" opacity="0.3">
+    <animate attributeName="opacity" values="0.3;0.8;0.3" dur="3.5s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Main Content Area -->
+  <rect x="100" y="150" width="1000" height="330" rx="20" fill="rgba(17,24,39,0.8)" stroke="rgba(237,20,91,0.3)" stroke-width="2"/>
+  
+  <!-- Rocket Icon -->
+  <g transform="translate(200, 250)">
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="80" fill="url(#pinkGradient)">🚀</text>
+    <animateTransform attributeName="transform" type="translate" values="200,250; 205,245; 200,250" dur="2s" repeatCount="indefinite"/>
+  </g>
+  
+  <!-- Title -->
+  <text x="350" y="280" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="white">
+    <tspan fill="url(#pinkGradient)">FIAP</tspan>
+    <tspan fill="white"> MATCH</tspan>
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="350" y="330" font-family="Arial, sans-serif" font-size="28" fill="#D1D5DB">
+    Conectando Talentos, Criando Oportunidades
+  </text>
+  
+  <!-- Features -->
+  <text x="350" y="380" font-family="Arial, sans-serif" font-size="18" fill="#9CA3AF">
+    🎯 Conecte-se • 🏆 Ganhe pontos • 🎁 Concorra a prêmios
+  </text>
+  
+  <!-- URL -->
+  <text x="350" y="420" font-family="Arial, sans-serif" font-size="16" fill="#ED145B">
+    app.fiapmatch.com
+  </text>
+  
+  <!-- Decorative Elements -->
+  <rect x="100" y="150" width="20" height="330" fill="url(#pinkGradient)" rx="10"/>
+  <circle cx="1150" cy="315" r="60" fill="none" stroke="url(#pinkGradient)" stroke-width="3" opacity="0.5">
+    <animate attributeName="r" values="60;70;60" dur="3s" repeatCount="indefinite"/>
+  </circle>
+</svg>
