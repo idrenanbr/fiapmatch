@@ -39,19 +39,16 @@ function adjustLayoutForDevice() {
             deviceIcon.className = 'fas fa-mobile-alt';
             deviceText.textContent = 'Modo Mobile • Layout otimizado para celular';
             body.classList.add('mobile-layout');
-            console.log('📱 Layout Mobile ativado');
             
         } else if (deviceType === 'tablet') {
             deviceIcon.className = 'fas fa-tablet-alt';
             deviceText.textContent = 'Modo Tablet • Layout intermediário';
             body.classList.add('tablet-layout');
-            console.log('📱 Layout Tablet ativado');
             
         } else {
             deviceIcon.className = 'fas fa-desktop';
             deviceText.textContent = 'Modo Desktop • Layout completo';
             body.classList.add('desktop-layout');
-            console.log('💻 Layout Desktop ativado');
         }
     }
     
@@ -94,7 +91,6 @@ function adjustLayoutForDevice() {
 function openApp(){
     try {
         const deviceType = getDeviceType();
-        console.log(`Abrindo app em: ${deviceType}`);
         
         // Abre o app principal
         window.location.href = 'app.html';
@@ -107,7 +103,6 @@ function openApp(){
 function openValidator(){
     try {
         const deviceType = getDeviceType();
-        console.log(`Abrindo validador em: ${deviceType}`);
         
         // Abre o validador do stand
         window.location.href = 'validador-stand.html';
@@ -119,7 +114,6 @@ function openValidator(){
 
 // Inicialização
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('FIAP Match - Página inicial carregada');
     
     // Ajustar layout inicial
     adjustLayoutForDevice();

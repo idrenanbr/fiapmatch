@@ -4,7 +4,6 @@
 if (!window.__FIAP_APP_PART1__) {
   window.__FIAP_APP_PART1__ = true;
 
-  console.debug('[FIAP] assets/js/app.js (Parte 1) carregado');
 
   // ===== Estado Global =====
   window.state = window.state || {
@@ -261,7 +260,6 @@ if (!window.__FIAP_APP_PART1__) {
 // QR/Conexões, Badges/Ranking, Notificações, Inicialização e Modais
 if (!window.__FIAP_APP_PART3B__) {
   window.__FIAP_APP_PART3B__ = true;
-  console.debug('[FIAP] assets/js/app.js (Parte 3b) carregado');
 
   // ===== QR / Código curto =====
   window.generateQRCode = function(){
@@ -381,7 +379,6 @@ if (!window.__FIAP_APP_PART3B__) {
 // Autenticação (login/admin) e utilitários de terminal admin
 if (!window.__FIAP_APP_PART2__) {
   window.__FIAP_APP_PART2__ = true;
-  console.debug('[FIAP] assets/js/app.js (Parte 2) carregado');
 
   // ===== Autenticação =====
   window.attemptLogin = function() {
@@ -493,7 +490,6 @@ if (!window.__FIAP_APP_PART2__) {
 // Match cards, ações (accept/reject/super) e estatísticas
 if (!window.__FIAP_APP_PART3A__) {
   window.__FIAP_APP_PART3A__ = true;
-  console.debug('[FIAP] assets/js/app.js (Parte 3a) carregado');
 
   // ===== Match cards =====
   window.generateDemoProfiles = function(){

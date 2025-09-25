@@ -314,7 +314,6 @@
             qrScanner = new QrScanner(
                 document.getElementById('qr-reader'),
                 result => {
-                    console.log('QR Code detected:', result);
                     validateQRCode(result);
                 },
                 {
