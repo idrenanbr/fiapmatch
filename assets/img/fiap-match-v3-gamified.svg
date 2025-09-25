@@ -1,0 +1,101 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Gradientes vibrantes -->
+    <linearGradient id="gameGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ED145B;stop-opacity:1" />
+      <stop offset="25%" style="stop-color:#FF6B9D;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#FF4081;stop-opacity:1" />
+      <stop offset="75%" style="stop-color:#E91E63;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#C2185B;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="bgGame" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1A1A2E;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#16213E;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0F3460;stop-opacity:1" />
+    </linearGradient>
+    
+    <radialGradient id="glowGame" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#ED145B;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#ED145B;stop-opacity:0.1" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Background gamificado -->
+  <rect width="1200" height="630" fill="url(#bgGame)"/>
+  
+  <!-- Partículas de energia -->
+  <circle cx="100" cy="100" r="4" fill="#ED145B" opacity="0.8">
+    <animate attributeName="cy" values="100;50;100" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.8;1;0.8" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  
+  <circle cx="1100" cy="150" r="3" fill="#FF4081" opacity="0.7">
+    <animate attributeName="cx" values="1100;1050;1100" dur="2.5s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.7;1;0.7" dur="2.5s" repeatCount="indefinite"/>
+  </circle>
+  
+  <circle cx="150" cy="500" r="5" fill="#E91E63" opacity="0.6">
+    <animate attributeName="r" values="5;8;5" dur="3s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.6;1;0.6" dur="3s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Card principal com borda brilhante -->
+  <rect x="100" y="140" width="1000" height="350" rx="25" fill="rgba(26,26,46,0.9)" stroke="url(#gameGradient)" stroke-width="4"/>
+  
+  <!-- Barra de progresso decorativa -->
+  <rect x="100" y="140" width="1000" height="8" fill="url(#gameGradient)" rx="4"/>
+  
+  <!-- Logo FIAP Match com efeito -->
+  <text x="600" y="250" font-family="Arial, sans-serif" font-size="64" font-weight="bold" text-anchor="middle" fill="url(#gameGradient)">
+    FIAP MATCH
+  </text>
+  
+  <!-- Subtítulo com estilo game -->
+  <text x="600" y="290" font-family="Arial, sans-serif" font-size="22" text-anchor="middle" fill="#E2E8F0">
+    Conectando Talentos, Criando Oportunidades
+  </text>
+  
+  <!-- Stats em tempo real -->
+  <g transform="translate(600, 320)">
+    <rect x="-200" y="0" width="400" height="60" rx="30" fill="rgba(237,20,91,0.1)" stroke="url(#gameGradient)" stroke-width="2"/>
+    
+    <!-- Contador de usuários -->
+    <text x="0" y="25" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" fill="url(#gameGradient)" font-weight="bold">
+      <tspan id="userCount">1,247</tspan> usuários online
+    </text>
+    
+    <!-- Nível atual -->
+    <text x="0" y="45" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#94A3B8">
+      Nível <tspan fill="url(#gameGradient)">Ouro</tspan> • <tspan id="points">2,580</tspan> pontos
+    </text>
+  </g>
+  
+  <!-- Elementos de UI gamificados -->
+  <g transform="translate(600, 420)">
+    <!-- Botões de ação -->
+    <rect x="-120" y="-15" width="80" height="30" rx="15" fill="url(#gameGradient)" opacity="0.8">
+      <animate attributeName="opacity" values="0.8;1;0.8" dur="2s" repeatCount="indefinite"/>
+    </rect>
+    <text x="-80" y="2" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="white" font-weight="bold">
+      CONECTAR
+    </text>
+    
+    <rect x="40" y="-15" width="80" height="30" rx="15" fill="url(#gameGradient)" opacity="0.8">
+      <animate attributeName="opacity" values="0.8;1;0.8" dur="2.5s" repeatCount="indefinite"/>
+    </rect>
+    <text x="80" y="2" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="white" font-weight="bold">
+      GANHAR
+    </text>
+  </g>
+  
+  <!-- URL com estilo game -->
+  <text x="600" y="480" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="url(#gameGradient)" font-weight="bold">
+    app.fiapmatch.com
+  </text>
+  
+  <!-- Efeito de brilho de fundo -->
+  <ellipse cx="600" cy="315" rx="500" ry="250" fill="url(#glowGame)" opacity="0.1">
+    <animate attributeName="opacity" values="0.1;0.3;0.1" dur="4s" repeatCount="indefinite"/>
+  </ellipse>
+</svg>
