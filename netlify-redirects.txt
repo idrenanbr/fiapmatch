@@ -1,0 +1,14 @@
+# Netlify Redirects para detectar rede social
+# Este arquivo deve ser renomeado para _redirects e colocado na raiz do projeto
+
+# Redirect baseado no User-Agent
+/facebook/* https://app.fiapmatch.com/index.html?network=facebook 200
+/twitter/* https://app.fiapmatch.com/index.html?network=twitter 200
+/linkedin/* https://app.fiapmatch.com/index.html?network=linkedin 200
+/discord/* https://app.fiapmatch.com/index.html?network=discord 200
+
+# Redirect para diferentes versões
+/og-image-meta https://app.fiapmatch.com/assets/img/fiap-match-meta-style.svg 200
+/og-image-twitter https://app.fiapmatch.com/assets/img/fiap-match-x-style.svg 200
+/og-image-linkedin https://app.fiapmatch.com/assets/img/fiap-match-linkedin-style.svg 200
+/og-image-discord https://app.fiapmatch.com/assets/img/fiap-match-discord-style.svg 200

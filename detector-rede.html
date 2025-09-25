@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>FIAP Match • Conectando Talentos, Criando Oportunidades</title>
+    
+    <!-- Meta Tags Padrão -->
+    <meta name="description" content="FIAP Match - Aplicativo de networking para conectar talentos e criar oportunidades. Cadastre-se, conecte-se com outros participantes e ganhe pontos!">
+    
+    <!-- Meta Tags Dinâmicas (serão alteradas pelo JavaScript) -->
+    <meta property="og:url" content="https://app.fiapmatch.com">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="FIAP Match • Conectando Talentos, Criando Oportunidades">
+    <meta property="og:description" content="FIAP Match - Aplicativo de networking para conectar talentos e criar oportunidades. Cadastre-se, conecte-se com outros participantes e ganhe pontos!">
+    <meta property="og:image" content="https://app.fiapmatch.com/assets/img/fiap-match-meta-style.svg" id="ogImage">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="FIAP Match - Dynamic Preview" id="ogImageAlt">
+    <meta property="og:site_name" content="FIAP Match">
+    <meta property="og:locale" content="pt_BR">
+    
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="app.fiapmatch.com">
+    <meta property="twitter:url" content="https://app.fiapmatch.com">
+    <meta name="twitter:title" content="FIAP Match • Conectando Talentos, Criando Oportunidades">
+    <meta name="twitter:description" content="FIAP Match - Aplicativo de networking para conectar talentos e criar oportunidades. Cadastre-se, conecte-se com outros participantes e ganhe pontos!">
+    <meta name="twitter:image" content="https://app.fiapmatch.com/assets/img/fiap-match-x-style.svg" id="twitterImage">
+    <meta name="twitter:image:alt" content="FIAP Match - X Style Preview" id="twitterImageAlt">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://app.fiapmatch.com">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#ED145B">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- External Resources -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/index.css">
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1E1E1E 0%, #0D0D0D 100%);
+            color: white;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .detector-info {
+            background: rgba(237,20,91,0.1);
+            border: 1px solid #ED145B;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .detector-info h1 {
+            color: #ED145B;
+            margin-bottom: 20px;
+        }
+        
+        .detector-info p {
+            color: #E0E0E0;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .current-image {
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .current-image h3 {
+            color: #ED145B;
+            margin-bottom: 10px;
+        }
+        
+        .current-image img {
+            max-width: 300px;
+            height: 157px;
+            border-radius: 8px;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+        
+        .test-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .test-btn {
+            background: linear-gradient(135deg, #ED145B, #FF4081);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .test-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(237,20,91,0.4);
+        }
+        
+        .status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            background: rgba(37,211,102,0.1);
+            border: 1px solid #25D366;
+            color: #25D366;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="detector-info">
+            <h1>🔍 Detector de Rede Social</h1>
+            <p>Este sistema detecta qual rede social está acessando e mostra a imagem correspondente.</p>
+            <p><strong>Nota:</strong> Redes sociais não executam JavaScript, então este é apenas um teste visual.</p>
+            
+            <div class="current-image">
+                <h3>📱 Imagem Atual para Facebook/WhatsApp/LinkedIn/Discord:</h3>
+                <img src="assets/img/fiap-match-meta-style.svg" alt="Meta Style" id="currentOgImage">
+                <p id="currentOgUrl">https://app.fiapmatch.com/assets/img/fiap-match-meta-style.svg</p>
+            </div>
+            
+            <div class="current-image">
+                <h3>🐦 Imagem Atual para Twitter/X:</h3>
+                <img src="assets/img/fiap-match-x-style.svg" alt="X Style" id="currentTwitterImage">
+                <p id="currentTwitterUrl">https://app.fiapmatch.com/assets/img/fiap-match-x-style.svg</p>
+            </div>
+            
+            <div class="test-buttons">
+                <button class="test-btn" onclick="changeToLinkedIn()">💼 LinkedIn Style</button>
+                <button class="test-btn" onclick="changeToDiscord()">🎮 Discord Style</button>
+                <button class="test-btn" onclick="changeToMeta()">📘 Meta Style</button>
+                <button class="test-btn" onclick="changeToX()">🐦 X Style</button>
+            </div>
+            
+            <div class="status" id="status">
+                ✅ Sistema funcionando! Use os botões para trocar as imagens.
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Detectar rede social (para demonstração)
+        function detectSocialNetwork() {
+            const userAgent = navigator.userAgent;
+            const referrer = document.referrer;
+            
+            if (referrer.includes('facebook.com') || referrer.includes('fb.com')) {
+                return 'facebook';
+            } else if (referrer.includes('twitter.com') || referrer.includes('x.com')) {
+                return 'twitter';
+            } else if (referrer.includes('linkedin.com')) {
+                return 'linkedin';
+            } else if (referrer.includes('discord.com') || referrer.includes('discordapp.com')) {
+                return 'discord';
+            } else if (referrer.includes('whatsapp.com') || referrer.includes('wa.me')) {
+                return 'whatsapp';
+            } else if (referrer.includes('instagram.com')) {
+                return 'instagram';
+            }
+            
+            return 'direct';
+        }
+        
+        // Alterar imagem para LinkedIn
+        function changeToLinkedIn() {
+            const ogImage = document.getElementById('ogImage');
+            const ogImageAlt = document.getElementById('ogImageAlt');
+            const currentOgImage = document.getElementById('currentOgImage');
+            const currentOgUrl = document.getElementById('currentOgUrl');
+            const status = document.getElementById('status');
+            
+            ogImage.content = 'https://app.fiapmatch.com/assets/img/fiap-match-linkedin-style.svg';
+            ogImageAlt.content = 'FIAP Match - LinkedIn Style Preview';
+            currentOgImage.src = 'assets/img/fiap-match-linkedin-style.svg';
+            currentOgUrl.textContent = 'https://app.fiapmatch.com/assets/img/fiap-match-linkedin-style.svg';
+            status.textContent = '💼 Alterado para LinkedIn Style!';
+            status.style.background = 'rgba(10,102,194,0.1)';
+            status.style.borderColor = '#0A66C2';
+            status.style.color = '#0A66C2';
+        }
+        
+        // Alterar imagem para Discord
+        function changeToDiscord() {
+            const ogImage = document.getElementById('ogImage');
+            const ogImageAlt = document.getElementById('ogImageAlt');
+            const currentOgImage = document.getElementById('currentOgImage');
+            const currentOgUrl = document.getElementById('currentOgUrl');
+            const status = document.getElementById('status');
+            
+            ogImage.content = 'https://app.fiapmatch.com/assets/img/fiap-match-discord-style.svg';
+            ogImageAlt.content = 'FIAP Match - Discord Style Preview';
+            currentOgImage.src = 'assets/img/fiap-match-discord-style.svg';
+            currentOgUrl.textContent = 'https://app.fiapmatch.com/assets/img/fiap-match-discord-style.svg';
+            status.textContent = '🎮 Alterado para Discord Style!';
+            status.style.background = 'rgba(88,101,242,0.1)';
+            status.style.borderColor = '#5865F2';
+            status.style.color = '#5865F2';
+        }
+        
+        // Alterar imagem para Meta
+        function changeToMeta() {
+            const ogImage = document.getElementById('ogImage');
+            const ogImageAlt = document.getElementById('ogImageAlt');
+            const currentOgImage = document.getElementById('currentOgImage');
+            const currentOgUrl = document.getElementById('currentOgUrl');
+            const status = document.getElementById('status');
+            
+            ogImage.content = 'https://app.fiapmatch.com/assets/img/fiap-match-meta-style.svg';
+            ogImageAlt.content = 'FIAP Match - Meta Style Preview';
+            currentOgImage.src = 'assets/img/fiap-match-meta-style.svg';
+            currentOgUrl.textContent = 'https://app.fiapmatch.com/assets/img/fiap-match-meta-style.svg';
+            status.textContent = '📘 Alterado para Meta Style!';
+            status.style.background = 'rgba(24,119,242,0.1)';
+            status.style.borderColor = '#1877F2';
+            status.style.color = '#1877F2';
+        }
+        
+        // Alterar imagem para X
+        function changeToX() {
+            const twitterImage = document.getElementById('twitterImage');
+            const twitterImageAlt = document.getElementById('twitterImageAlt');
+            const currentTwitterImage = document.getElementById('currentTwitterImage');
+            const currentTwitterUrl = document.getElementById('currentTwitterUrl');
+            const status = document.getElementById('status');
+            
+            twitterImage.content = 'https://app.fiapmatch.com/assets/img/fiap-match-x-style.svg';
+            twitterImageAlt.content = 'FIAP Match - X Style Preview';
+            currentTwitterImage.src = 'assets/img/fiap-match-x-style.svg';
+            currentTwitterUrl.textContent = 'https://app.fiapmatch.com/assets/img/fiap-match-x-style.svg';
+            status.textContent = '🐦 Alterado para X Style!';
+            status.style.background = 'rgba(0,0,0,0.1)';
+            status.style.borderColor = '#000000';
+            status.style.color = '#FFFFFF';
+        }
+        
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', function() {
+            const network = detectSocialNetwork();
+            console.log('Rede social detectada:', network);
+            
+            // Mostrar status inicial
+            const status = document.getElementById('status');
+            status.textContent = `🔍 Rede detectada: ${network.toUpperCase()}`;
+        });
+    </script>
+</body>
+</html>

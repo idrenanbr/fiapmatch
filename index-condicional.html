@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>FIAP Match • Conectando Talentos, Criando Oportunidades</title>
+    
+    <!-- HTML Meta Tags -->
+    <meta name="description" content="FIAP Match - Aplicativo de networking para conectar talentos e criar oportunidades. Cadastre-se, conecte-se com outros participantes e ganhe pontos!">
+    
+    <!-- Meta Tags Padrão (Meta Style) -->
+    <meta property="og:url" content="https://app.fiapmatch.com">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="FIAP Match • Conectando Talentos, Criando Oportunidades">
+    <meta property="og:description" content="FIAP Match - Aplicativo de networking para conectar talentos e criar oportunidades. Cadastre-se, conecte-se com outros participantes e ganhe pontos!">
+    <meta property="og:image" content="https://app.fiapmatch.com/assets/img/fiap-match-meta-style.svg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="FIAP Match - Meta Style Preview">
+    <meta property="og:site_name" content="FIAP Match">
+    <meta property="og:locale" content="pt_BR">
+    
+    <!-- Twitter Meta Tags (X Style) -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="app.fiapmatch.com">
+    <meta property="twitter:url" content="https://app.fiapmatch.com">
+    <meta name="twitter:title" content="FIAP Match • Conectando Talentos, Criando Oportunidades">
+    <meta name="twitter:description" content="FIAP Match - Aplicativo de networking para conectar talentos e criar oportunidades. Cadastre-se, conecte-se com outros participantes e ganhe pontos!">
+    <meta name="twitter:image" content="https://app.fiapmatch.com/assets/img/fiap-match-x-style.svg">
+    <meta name="twitter:image:alt" content="FIAP Match - X Style Preview">
+    
+    <!-- LinkedIn Meta Tags (LinkedIn Style) -->
+    <meta property="og:type" content="article">
+    <meta property="article:author" content="FIAP Match">
+    <meta property="article:section" content="Technology">
+    <meta property="article:tag" content="networking, tecnologia, carreira">
+    
+    <!-- Discord Meta Tags (Discord Style) -->
+    <meta name="theme-color" content="#5865F2">
+    <meta name="msapplication-TileColor" content="#5865F2">
+    
+    <!-- Meta Tags Generated via https://www.opengraph.xyz -->
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://app.fiapmatch.com">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#ED145B">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- External Resources -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/index.css">
+    
+    <script>
+        // Detectar rede social via URL parameter
+        function detectNetworkFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const network = urlParams.get('network');
+            return network;
+        }
+        
+        // Alterar meta tags baseado na rede
+        function changeMetaTagsForNetwork(network) {
+            const ogImage = document.querySelector('meta[property="og:image"]');
+            const ogImageAlt = document.querySelector('meta[property="og:image:alt"]');
+            const twitterImage = document.querySelector('meta[name="twitter:image"]');
+            const twitterImageAlt = document.querySelector('meta[name="twitter:image:alt"]');
+            
+            switch(network) {
+                case 'linkedin':
+                    ogImage.content = 'https://app.fiapmatch.com/assets/img/fiap-match-linkedin-style.svg';
+                    ogImageAlt.content = 'FIAP Match - LinkedIn Style Preview';
+                    break;
+                case 'discord':
+                    ogImage.content = 'https://app.fiapmatch.com/assets/img/fiap-match-discord-style.svg';
+                    ogImageAlt.content = 'FIAP Match - Discord Style Preview';
+                    break;
+                case 'twitter':
+                    twitterImage.content = 'https://app.fiapmatch.com/assets/img/fiap-match-x-style.svg';
+                    twitterImageAlt.content = 'FIAP Match - X Style Preview';
+                    break;
+                default:
+                    // Manter Meta Style para Facebook/WhatsApp/Instagram
+                    ogImage.content = 'https://app.fiapmatch.com/assets/img/fiap-match-meta-style.svg';
+                    ogImageAlt.content = 'FIAP Match - Meta Style Preview';
+            }
+        }
+        
+        // Executar quando a página carregar
+        document.addEventListener('DOMContentLoaded', function() {
+            const network = detectNetworkFromURL();
+            if (network) {
+                changeMetaTagsForNetwork(network);
+                console.log('Rede detectada:', network);
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="animated-bg"></div>
+    
+    <!-- Main App Container -->
+    <div class="app-container" id="app">
+        <!-- Welcome Screen -->
+        <div id="welcomeScreen" class="screen welcome-screen">
+            <div style="margin-top: 20px;"></div>
+            <div class="logo-animation">🚀</div>
+            <h1 class="welcome-title">
+                <span class="pink">FIAP</span> MATCH
+            </h1>
+            <div class="version-badge">
+                <span class="version-text">VERSÃO NEXT</span>
+            </div>
+            <p class="welcome-subtitle" id="welcomeTagline">Conectando Talentos, Criando Oportunidades</p>
+            
+            <div class="welcome-features">
+                <div class="feature-item">
+                    <button class="feature-icon-btn" onclick="showFeaturePage('connect')" aria-label="Conecte-se">
+                        <span class="feature-icon">🎯</span>
+                    </button>
+                    <span class="feature-label">Conecte-se</span>
+                </div>
+                <div class="feature-item">
+                    <button class="feature-icon-btn" onclick="showFeaturePage('points')" aria-label="Ganhe pontos">
+                        <span class="feature-icon">🏆</span>
+                    </button>
+                    <span class="feature-label">Ganhe pontos</span>
+                </div>
+                <div class="feature-item">
+                    <button class="feature-icon-btn" onclick="showFeaturePage('prizes')" aria-label="Concorra a prêmios">
+                        <span class="feature-icon">🎁</span>
+                    </button>
+                    <span class="feature-label">Concorra a prêmios</span>
+                </div>
+            </div>
+            
+            <div class="auth-options">
+                <button onclick="showLoginScreen()" class="btn-primary auth-btn">
+                    <i class="fas fa-sign-in-alt"></i> Já tenho cadastro
+                </button>
+                <button onclick="startQuickSetup()" class="btn-start auth-btn">
+                    <i class="fas fa-user-plus"></i> Primeira vez aqui?
+                </button>
+            </div>
+            
+            <div class="admin-access">
+                <button onclick="showAdminLogin()" class="admin-btn">
+                    <i class="fas fa-cog"></i> Acesso Staff/Admin
+                </button>
+            </div>
+            
+            <p class="welcome-footer">
+                <i class="fas fa-clock"></i> Setup em 30 segundos • 
+                <i class="fas fa-users"></i> Conecte-se
+            </p>
+        </div>
+    </div>
+    
+    <script src="assets/js/index.js"></script>
+</body>
+</html>
