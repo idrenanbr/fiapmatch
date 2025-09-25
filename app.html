@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>FIAP Match - Conectando para Transformar 🚀</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#ED145B">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Confetti Animation -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <!-- QR Code Generator -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- External App Styles -->
+    <link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body>
+    <div class="animated-bg"></div>
+    
+    <!-- Floating Particles -->
+    <div id="particles"></div>
+    
+    <!-- Main App Container -->
+    <div class="app-container" id="app">
+        <!-- Welcome Screen -->
+        <div id="welcomeScreen" class="screen welcome-screen">
+            <div style="margin-top: 20px;"></div>
+            <div class="logo-animation">🚀</div>
+            <h1 class="welcome-title">
+                <span class="pink">FIAP</span> MATCH
+            </h1>
+            <div class="version-badge">
+                <span class="version-text">VERSÃO NEXT</span>
+            </div>
+            <p class="welcome-subtitle" id="welcomeTagline">Conectando Talentos, Criando Oportunidades</p>
+            
+            <div class="welcome-features">
+                <div class="feature-item">
+                    <button class="feature-icon-btn" onclick="showFeaturePage('connect')" aria-label="Conecte-se">
+                        <span class="feature-icon">🎯</span>
+                    </button>
+                    <span class="feature-label">Conecte-se</span>
+                </div>
+                <div class="feature-item">
+                    <button class="feature-icon-btn" onclick="showFeaturePage('points')" aria-label="Ganhe pontos">
+                        <span class="feature-icon">🏆</span>
+                    </button>
+                    <span class="feature-label">Ganhe pontos</span>
+                </div>
+                <div class="feature-item">
+                    <button class="feature-icon-btn" onclick="showFeaturePage('prizes')" aria-label="Concorra a prêmios">
+                        <span class="feature-icon">🎁</span>
+                    </button>
+                    <span class="feature-label">Concorra a prêmios</span>
+                </div>
+            </div>
+            
+            <div class="auth-options">
+                <button onclick="showLoginScreen()" class="btn-primary auth-btn">
+                    <i class="fas fa-sign-in-alt"></i> Já tenho cadastro
+                </button>
+                <button onclick="startQuickSetup()" class="btn-start auth-btn">
+                    <i class="fas fa-user-plus"></i> Primeira vez aqui?
+                </button>
+            </div>
+            
+            <div class="admin-access">
+                <button onclick="showAdminLogin()" class="admin-btn">
+                    <i class="fas fa-cog"></i> Acesso Staff/Admin
+                </button>
+            </div>
+            
+            <p class="welcome-footer">
+                <i class="fas fa-clock"></i> Setup em 30 segundos • 
+                <i class="fas fa-users"></i> Conecte-se
+            </p>
+        </div>
+        
+        <!-- Admin Dashboard Screen -->
+        <div id="adminDashboard" class="screen hidden" style="padding:20px;min-height:100vh;background:linear-gradient(135deg, var(--fiap-dark) 0%, var(--fiap-darker) 100%);color:var(--fiap-white);">
+            <div class="admin-header" style="position:relative;margin-bottom:20px;">
+                <button onclick="goBackToWelcome()" class="back-btn"><i class="fas fa-arrow-left"></i></button>
+                <h2 class="section-title">Admin • Terminal</h2>
+                <p class="section-subtitle">Cadastros e Métricas locais</p>
+            </div>
+
+            <div id="adminStats" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:15px;"></div>
+
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:15px;">
+                <input id="adminSearch" class="input-field" placeholder="Buscar (nome, email, RM, UID)" style="flex:1;">
+                <button class="btn-primary" onclick="adminExportJSON()" style="padding:10px 14px;">Exportar JSON</button>
+                <button class="btn-primary" onclick="adminRefresh()" style="padding:10px 14px;background:#374151;">Atualizar</button>
+                <button class="btn-primary" onclick="adminClearDirectory()" style="padding:10px 14px;background:#7F1D1D;">Limpar diretório</button>
+            </div>
+
+            <div style="overflow:auto;border:1px solid var(--fiap-gray);border-radius:10px;">
+                <table style="width:100%;border-collapse:collapse;min-width:700px;">
+                    <thead>
+                        <tr style="background:#111827;">
+                            <th style="text-align:left;padding:10px;border-bottom:1px solid var(--fiap-gray);">Nome</th>
+                            <th style="text-align:left;padding:10px;border-bottom:1px solid var(--fiap-gray);">Papel</th>
+                            <th style="text-align:left;padding:10px;border-bottom:1px solid var(--fiap-gray);">Email</th>
+                            <th style="text-align:left;padding:10px;border-bottom:1px solid var(--fiap-gray);">RM</th>
+                            <th style="text-align:left;padding:10px;border-bottom:1px solid var(--fiap-gray);">UID</th>
+                            <th style="text-align:left;padding:10px;border-bottom:1px solid var(--fiap-gray);">Validado</th>
+                            <th style="text-align:left;padding:10px;border-bottom:1px solid var(--fiap-gray);">Device</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminTable"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Feature Pages -->
+        <!-- Connect Feature Page -->
+        <div id="connectFeaturePage" class="screen feature-page hidden">
+            <div class="feature-header">
+                <button onclick="goBackToWelcome()" class="back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <div class="feature-icon-large">🎯</div>
+                <h2 class="feature-title">Conecte-se</h2>
+                <p class="feature-subtitle">Encontre pessoas com interesses similares</p>
+            </div>
+            
+            <div class="feature-content">
+                <div class="feature-section">
+                    <h3>Como Funciona?</h3>
+                    <div class="feature-steps">
+                        <div class="step-item">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Escaneie QR Codes</h4>
+                                <p>Use a câmera do seu celular para escanear o QR Code de outros participantes</p>
+                            </div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Digite Códigos Curtos</h4>
+                                <p>Ou digite o código curto (ex: STU-ABC1234) para conectar rapidamente</p>
+                            </div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Conecte e Ganhe</h4>
+                                <p>Cada conexão válida gera pontos baseados no papel da pessoa</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="feature-section">
+                    <h3>Tipos de Conexão</h3>
+                    <div class="connection-types">
+                        <div class="connection-type">
+                            <span class="type-icon">🎓</span>
+                            <span class="type-name">Alunos FIAP</span>
+                            <span class="type-points">+10 pontos</span>
+                        </div>
+                        <div class="connection-type">
+                            <span class="type-icon">🌟</span>
+                            <span class="type-name">Visitantes</span>
+                            <span class="type-points">+30 pontos</span>
+                        </div>
+                        <div class="connection-type">
+                            <span class="type-icon">🔬</span>
+                            <span class="type-name">Iniciação Científica</span>
+                            <span class="type-points">+20 pontos</span>
+                        </div>
+                        <div class="connection-type">
+                            <span class="type-icon">🏆</span>
+                            <span class="type-name">Challenge</span>
+                            <span class="type-points">+20 pontos</span>
+                        </div>
+                        <div class="connection-type">
+                            <span class="type-icon">👨‍🏫</span>
+                            <span class="type-name">Professores</span>
+                            <span class="type-points">+10 pontos + Badge</span>
+                        </div>
+                        <div class="connection-type">
+                            <span class="type-icon">👥</span>
+                            <span class="type-name">Funcionários</span>
+                            <span class="type-points">+15 pontos</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <button onclick="goBackToWelcome()" class="btn-primary feature-back-btn">
+                    <i class="fas fa-arrow-left"></i> Voltar
+                </button>
+            </div>
+        </div>
+        
+        <!-- Points Feature Page -->
+        <div id="pointsFeaturePage" class="screen feature-page hidden">
+            <div class="feature-header">
+                <button onclick="goBackToWelcome()" class="back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <div class="feature-icon-large">🏆</div>
+                <h2 class="feature-title">Ganhe Pontos</h2>
+                <p class="feature-subtitle">Sistema de gamificação inteligente</p>
+            </div>
+            
+            <div class="feature-content">
+                <div class="feature-section">
+                    <h3>Sistema de Pontuação</h3>
+                    <div class="points-explanation">
+                        <p>Cada conexão gera pontos baseados no papel da pessoa que você conecta. Quanto mais diversificado seu network, mais pontos você ganha!</p>
+                    </div>
+                </div>
+                
+                <div class="feature-section">
+                    <h3>Missões Especiais</h3>
+                    <div class="missions-list">
+                        <div class="mission-item">
+                            <div class="mission-icon">🎯</div>
+                            <div class="mission-content">
+                                <h4>Conector Universal</h4>
+                                <p>Conecte com todos os 6 tipos de papel diferentes</p>
+                                <span class="mission-reward">+50 pontos extras</span>
+                            </div>
+                        </div>
+                        <div class="mission-item">
+                            <div class="mission-icon">👨‍🏫</div>
+                            <div class="mission-content">
+                                <h4>Mentoria Next</h4>
+                                <p>Conecte com um professor</p>
+                                <span class="mission-reward">Badge exclusiva</span>
+                            </div>
+                        </div>
+                        <div class="mission-item">
+                            <div class="mission-icon">🎁</div>
+                            <div class="mission-content">
+                                <h4>Bônus Surpresa</h4>
+                                <p>Conecte com funcionários para chances especiais</p>
+                                <span class="mission-reward">Recompensas variadas</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="feature-section">
+                    <h3>Ranking em Tempo Real</h3>
+                    <div class="ranking-info">
+                        <p>Seus pontos são atualizados instantaneamente e você pode acompanhar sua posição no ranking geral do evento!</p>
+                    </div>
+                </div>
+                
+                <button onclick="goBackToWelcome()" class="btn-primary feature-back-btn">
+                    <i class="fas fa-arrow-left"></i> Voltar
+                </button>
+            </div>
+        </div>
+        
+        <!-- Prizes Feature Page -->
+        <div id="prizesFeaturePage" class="screen feature-page hidden">
+            <div class="feature-header">
+                <button onclick="goBackToWelcome()" class="back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <div class="feature-icon-large">🎁</div>
+                <h2 class="feature-title">Concorra a Prêmios</h2>
+                <p class="feature-subtitle">Recompensas incríveis esperando por você</p>
+            </div>
+            
+            <div class="feature-content">
+                <div class="feature-section">
+                    <h3>Brinde Garantido</h3>
+                    <div class="prize-guaranteed">
+                        <div class="prize-icon">🎁</div>
+                        <div class="prize-info">
+                            <h4>Para Todos os Participantes</h4>
+                            <p>Faça seu cadastro, vá ao stand e valide seu QR Code para garantir seu brinde físico!</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="feature-section">
+                    <h3>Ranking Competitivo</h3>
+                    <div class="ranking-prizes">
+                        <div class="prize-tier">
+                            <div class="tier-icon">🥇</div>
+                            <div class="tier-info">
+                                <h4>1º Lugar</h4>
+                                <p>Kit premium + Troféu + Prêmio especial</p>
+                            </div>
+                        </div>
+                        <div class="prize-tier">
+                            <div class="tier-icon">🥈</div>
+                            <div class="tier-info">
+                                <h4>2º Lugar</h4>
+                                <p>Kit premium + Medalha</p>
+                            </div>
+                        </div>
+                        <div class="prize-tier">
+                            <div class="tier-icon">🥉</div>
+                            <div class="tier-info">
+                                <h4>3º Lugar</h4>
+                                <p>Kit premium + Certificado</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="feature-section">
+                    <h3>Como Participar</h3>
+                    <div class="participation-steps">
+                        <div class="participation-step">
+                            <span class="step-icon">📱</span>
+                            <span>Cadastre-se no app</span>
+                        </div>
+                        <div class="participation-step">
+                            <span class="step-icon">🏃‍♂️</span>
+                            <span>Vá ao stand do evento</span>
+                        </div>
+                        <div class="participation-step">
+                            <span class="step-icon">📷</span>
+                            <span>Valide seu QR Code</span>
+                        </div>
+                        <div class="participation-step">
+                            <span class="step-icon">🎯</span>
+                            <span>Conecte com outros participantes</span>
+                        </div>
+                        <div class="participation-step">
+                            <span class="step-icon">🏆</span>
+                            <span>Suba no ranking e ganhe!</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <button onclick="goBackToWelcome()" class="btn-primary feature-back-btn">
+                    <i class="fas fa-arrow-left"></i> Voltar
+                </button>
+            </div>
+        </div>
+        
+        <!-- Login Screen -->
+        <div id="loginScreen" class="screen login-screen hidden">
+            <div class="login-header">
+                <button onclick="goBackToWelcome()" class="back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h2 class="section-title">Fazer Login</h2>
+                <p class="section-subtitle">Digite seu e-mail, RM ou nome completo</p>
+            </div>
+            
+            <div class="login-form">
+                <div class="input-group">
+                    <label for="loginIdentifier">Identificação</label>
+                    <input type="text" id="loginIdentifier" placeholder="email • RM • nome completo" class="input-field" autocomplete="off">
+                </div>
+                
+                <button onclick="attemptLogin()" class="btn-primary login-btn">
+                    <i class="fas fa-sign-in-alt"></i> Entrar
+                </button>
+                
+                <div class="login-options">
+                    <button onclick="startQuickSetup()" class="link-btn">
+                        Não tenho cadastro ainda
+                    </button>
+                    <button onclick="openSupport()" class="link-btn">Falar com suporte</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Admin Login Screen -->
+        <div id="adminLoginScreen" class="screen admin-login-screen hidden">
+            <div class="admin-header">
+                <button onclick="goBackToWelcome()" class="back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h2 class="section-title">Acesso Staff/Admin</h2>
+                <p class="section-subtitle">Área restrita para equipe do evento</p>
+            </div>
+            
+            <div class="admin-form">
+                <div class="admin-role-selector">
+                    <button onclick="selectAdminRole('STAFF')" class="admin-role-btn" data-role="STAFF">
+                        <i class="fas fa-users"></i>
+                        <span>Staff do Evento</span>
+                    </button>
+                    <button onclick="selectAdminRole('ADMIN')" class="admin-role-btn" data-role="ADMIN">
+                        <i class="fas fa-crown"></i>
+                        <span>Administrador</span>
+                    </button>
+                    <button onclick="selectAdminRole('VALIDATOR')" class="admin-role-btn" data-role="VALIDATOR">
+                        <i class="fas fa-qrcode"></i>
+                        <span>Validador Stand</span>
+                    </button>
+                </div>
+                
+                <div class="input-group">
+                    <label for="adminCode">Código de Acesso</label>
+                    <input type="password" id="adminCode" placeholder="Digite o código de acesso" class="input-field">
+                </div>
+                
+                <button onclick="attemptAdminLogin()" class="btn-primary admin-login-btn">
+                    <i class="fas fa-unlock"></i> Acessar
+                </button>
+            </div>
+        </div>
+        
+        <!-- Quick Setup Screen -->
+        <div id="quickSetup" class="screen quick-start hidden">
+            <div class="login-header" style="margin-bottom: 20px;">
+                <button onclick="goBackToWelcome()" class="back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h2 class="section-title">Escolha seu Papel!</h2>
+            </div>
+            
+            <p class="section-subtitle">Sua pulseira define seu papel no evento</p>
+            
+            <div class="bracelet-selector">
+                <div class="bracelet-card student-card" onclick="selectRole('STU')">
+                    <div class="card-glow"></div>
+                    <div class="bracelet-icon">🎓</div>
+                    <div class="bracelet-label">Alunos FIAP</div>
+                    <div class="bracelet-type">Estudantes</div>
+                </div>
+                
+                <div class="bracelet-card visitor-card" onclick="selectRole('VIS')">
+                    <div class="card-glow"></div>
+                    <div class="bracelet-icon">🌟</div>
+                    <div class="bracelet-label">Visitantes</div>
+                    <div class="bracelet-type">Convidados</div>
+                </div>
+                
+                <div class="bracelet-card research-card" onclick="selectRole('IC')">
+                    <div class="card-glow"></div>
+                    <div class="bracelet-icon">🔬</div>
+                    <div class="bracelet-label">Iniciação Científica</div>
+                    <div class="bracelet-type">Pesquisadores</div>
+                </div>
+                
+                <div class="bracelet-card challenge-card" onclick="selectRole('CHL')">
+                    <div class="card-glow"></div>
+                    <div class="bracelet-icon">🏆</div>
+                    <div class="bracelet-label">Challenge</div>
+                    <div class="bracelet-type">Competidores</div>
+                </div>
+                
+                <div class="bracelet-card teacher-card" onclick="selectRole('PRO')">
+                    <div class="card-glow"></div>
+                    <div class="bracelet-icon">👨‍🏫</div>
+                    <div class="bracelet-label">Professores</div>
+                    <div class="bracelet-type">Educadores</div>
+                </div>
+                
+                <div class="bracelet-card staff-card" onclick="selectRole('STA')">
+                    <div class="card-glow"></div>
+                    <div class="bracelet-icon">👥</div>
+                    <div class="bracelet-label">Funcionários</div>
+                    <div class="bracelet-type">Colaboradores</div>
+                </div>
+            </div>
+            
+            <div id="registrationForm" class="hidden">
+                <div id="dynamicFields"></div>
+                <div style="margin-top: 20px;">
+                    <label style="display: flex; align-items: center; gap: 10px; color: var(--fiap-white);">
+                        <input type="checkbox" id="lgpdConsent" style="transform: scale(1.2);">
+                        <span>Concordo com o tratamento dos meus dados conforme a LGPD</span>
+                    </label>
+                </div>
+                <button onclick="finishSetup()" class="btn-primary" style="margin-top: 20px;">
+                    GERAR MEU QR CODE! 🚀
+                </button>
+            </div>
+        </div>
+        
+        <!-- Main App Screen -->
+        <div id="mainApp" class="screen hidden">
+            <!-- Validation Banner -->
+            <div id="validationBanner" style="display:none;background:#F59E0B;color:#0D0D0D;padding:10px 14px;text-align:center;font-weight:800;">
+                ⚠️ Cadastro pendente. Valide no stand para liberar pontos, ranking e brinde.
+            </div>
+            
+            <!-- Stats Bar -->
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <div class="stat-icon">⚡</div>
+                    <div>
+                        <div class="stat-value" id="userPoints">0</div>
+                        <div class="stat-label">pontos</div>
+                    </div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-icon">🔥</div>
+                    <div>
+                        <div class="stat-value" id="userStreak">0</div>
+                        <div class="stat-label">streak</div>
+                    </div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-icon">🤝</div>
+                    <div>
+                        <div class="stat-value" id="userMatches">0</div>
+                        <div class="stat-label">matches</div>
+                    </div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-icon">🏆</div>
+                    <div>
+                        <div class="stat-value" id="userRank">#--</div>
+                        <div class="stat-label">ranking</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Match Stack -->
+            <div id="matchSection" class="match-stack">
+                <!-- Cards will be inserted here -->
+            </div>
+            
+            <!-- Ranking Section -->
+            <div id="rankingSection" class="ranking-container hidden">
+                <div class="ranking-header">
+                    <div class="trophy-icon">🏆</div>
+                    <h2 class="section-title">Top Conectores</h2>
+                    <p class="section-subtitle">Atualizado em tempo real</p>
+                </div>
+                
+                <div class="ranking-list" id="rankingList">
+                    <!-- Ranking items will be inserted here -->
+                </div>
+            </div>
+            
+            <!-- QR Code Section -->
+            <div id="qrSection" class="qr-section hidden">
+                <h2 class="section-title">Seu QR Code</h2>
+                <div class="qr-display">
+                    <div id="userQR"></div>
+                </div>
+                
+                <div style="background: var(--fiap-dark); padding: 20px; border-radius: 15px; margin: 20px 0; border: 2px solid var(--fiap-pink);">
+                    <h3 style="color: var(--fiap-pink); margin-bottom: 10px;">Seu Código Curto:</h3>
+                    <div style="font-size: 24px; font-weight: bold; font-family: monospace; color: var(--fiap-white);">
+                        <span id="userShortCode">N/A</span>
+                    </div>
+                </div>
+                
+                <p style="color: var(--fiap-light-gray); margin-top: 20px;">
+                    Mostre para confirmar conexões presenciais!<br>
+                    <strong style="color: var(--fiap-pink);">Pontos variam por papel!</strong>
+                </p>
+                
+                <div style="margin-top: 30px;">
+                    <h3 style="color: var(--fiap-white); margin-bottom: 15px;">Conectar com Outros:</h3>
+                    <input type="text" id="scanInput" placeholder="Digite o código curto (ex: STU-ABC1234)" class="input-field">
+                
+                    <button onclick="confirmScan()" class="btn-primary" style="margin-top: 15px;">
+                        Confirmar Conexão
+                    </button>
+                </div>
+                
+                <div style="margin-top: 30px; background: var(--fiap-darker); padding: 15px; border-radius: 10px; border: 1px solid var(--fiap-gray);">
+                    <h4 style="color: var(--fiap-white); margin-bottom: 10px;">📊 Suas Conexões:</h4>
+                    <div id="connectionsList" style="color: var(--fiap-light-gray); font-size: 14px;">
+                        <!-- Connections will be listed here -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Badges Section -->
+            <div id="badgesSection" class="prize-showcase hidden">
+                <h2 class="section-title">Suas Badges</h2>
+                
+                <div id="badgesList" class="ranking-list">
+                    <!-- Badges will be displayed here -->
+                </div>
+                
+                <div style="background: var(--fiap-darker); padding: 20px; border-radius: 15px; margin: 20px 0; border: 1px solid var(--fiap-gray);">
+                    <h3 style="color: var(--fiap-white); margin-bottom: 15px;">🏆 Badges Disponíveis:</h3>
+                    <div style="color: var(--fiap-light-gray); font-size: 14px;">
+                        <div style="margin-bottom: 10px;">• <strong>Check-in Next:</strong> Valide seu cadastro no stand</div>
+                        <div style="margin-bottom: 10px;">• <strong>Mentoria Next:</strong> Conecte com um professor</div>
+                        <div style="margin-bottom: 10px;">• <strong>Conector Universal:</strong> Conecte com todos os papéis</div>
+                        <div style="margin-bottom: 10px;">• <strong>Networker Pro:</strong> Faça 10 conexões</div>
+                        <div style="margin-bottom: 10px;">• <strong>Social Butterfly:</strong> Faça 25 conexões</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Prizes Section -->
+            <div id="prizeSection" class="prize-showcase hidden">
+                <h2 class="section-title">Prêmios do Dia</h2>
+                
+                <div class="prize-card">
+                    <div class="prize-icon">🥇</div>
+                    <div class="prize-title">Prêmio Master</div>
+                    <div class="prize-description">
+                        Troféu 3D exclusivo do Maker Lab + Badge LinkedIn verificado + Vale R$100
+                    </div>
+                    <div class="prize-requirements">
+                        <strong>Requisito:</strong> 1º lugar no ranking final
+                    </div>
+                </div>
+                
+                <div class="prize-card">
+                    <div class="prize-icon">🎁</div>
+                    <div class="prize-title">Top 3 Conectores</div>
+                    <div class="prize-description">
+                        Camiseta exclusiva FIAP Match + Kit FIAP
+                    </div>
+                    <div class="prize-requirements">
+                        <strong>Requisito:</strong> Top 3 no ranking
+                    </div>
+                </div>
+                
+                <div class="prize-card">
+                    <div class="prize-icon">🎯</div>
+                    <div class="prize-title">Missões Especiais</div>
+                    <div class="prize-description">
+                        Complete desafios para ganhar brindes surpresa!
+                    </div>
+                    <div class="prize-requirements">
+                        <strong>Ativas:</strong> 5 matches seguidos • Scan 10 QR codes • Streak de 20
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Bottom Navigation -->
+            <div class="bottom-nav">
+                <div class="nav-item active" onclick="showTab('match')">
+                    <i class="fas fa-fire nav-icon"></i>
+                    <span class="nav-label">Match</span>
+                </div>
+                
+                <div class="nav-item" onclick="showTab('ranking')">
+                    <i class="fas fa-trophy nav-icon"></i>
+                    <span class="nav-label">Ranking</span>
+                </div>
+                
+                <div class="nav-item" onclick="showTab('qr')">
+                    <i class="fas fa-qrcode nav-icon"></i>
+                    <span class="nav-label">QR Code</span>
+                </div>
+                
+                <div class="nav-item" onclick="showTab('badges')">
+                    <i class="fas fa-medal nav-icon"></i>
+                    <span class="nav-label">Badges</span>
+                </div>
+                
+                <div class="nav-item" onclick="showTab('prize')">
+                    <i class="fas fa-gift nav-icon"></i>
+                    <span class="nav-label">Prêmios</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="assets/js/app.js"></script>
+</body>
+</html>

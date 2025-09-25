@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>FIAP Match - Validador Stand</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- QR Code Scanner -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qr-scanner/1.4.2/qr-scanner.umd.min.js"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --fiap-pink: #ED145B;
+            --fiap-dark: #1E1E1E;
+            --fiap-darker: #0D0D0D;
+            --fiap-gray: #4A4A4A;
+            --fiap-light-gray: #8A8A8A;
+            --fiap-white: #FFFFFF;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--fiap-darker);
+            min-height: 100vh;
+            color: var(--fiap-white);
+        }
+        
+        .app-container {
+            max-width: 428px;
+            margin: 0 auto;
+            min-height: 100vh;
+            background: linear-gradient(180deg, var(--fiap-dark) 0%, var(--fiap-darker) 100%);
+            position: relative;
+        }
+        
+        .header {
+            background: var(--fiap-pink);
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .header p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+        
+        .scanner-section {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .scanner-container {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #qr-reader {
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        
+        .manual-input {
+            margin-top: 30px;
+        }
+        
+        .input-field {
+            width: 100%;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid var(--fiap-gray);
+            background: var(--fiap-dark);
+            color: var(--fiap-white);
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            border-color: var(--fiap-pink);
+        }
+        
+        .btn-primary {
+            width: 100%;
+            background: var(--fiap-pink);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background: #C41E3A;
+        }
+        
+        .btn-secondary {
+            width: 100%;
+            background: var(--fiap-gray);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        
+        .result-card {
+            background: var(--fiap-dark);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--fiap-gray);
+        }
+        
+        .result-success {
+            border-color: #4CAF50;
+            background: linear-gradient(135deg, var(--fiap-dark), #2E7D32);
+        }
+        
+        .result-error {
+            border-color: #F44336;
+            background: linear-gradient(135deg, var(--fiap-dark), #C62828);
+        }
+        
+        .result-warning {
+            border-color: #FF9800;
+            background: linear-gradient(135deg, var(--fiap-dark), #E65100);
+        }
+        
+        .user-info {
+            text-align: left;
+            margin: 15px 0;
+        }
+        
+        .user-info h3 {
+            color: var(--fiap-pink);
+            margin-bottom: 10px;
+        }
+        
+        .user-info p {
+            margin: 5px 0;
+            color: var(--fiap-light-gray);
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .status-validated {
+            background: #4CAF50;
+            color: white;
+        }
+        
+        .status-pending {
+            background: #FF9800;
+            color: white;
+        }
+        
+        .status-error {
+            background: #F44336;
+            color: white;
+        }
+        
+        .stats-section {
+            background: var(--fiap-dark);
+            padding: 20px;
+            margin: 20px;
+            border-radius: 15px;
+            border: 1px solid var(--fiap-gray);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 15px;
+            background: var(--fiap-darker);
+            border-radius: 10px;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--fiap-pink);
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: var(--fiap-light-gray);
+            margin-top: 5px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🏪 Validador Stand</h1>
+            <p>FIAP Match - Validação de Cadastros</p>
+        </div>
+        
+        <!-- Scanner Section -->
+        <div class="scanner-section">
+            <h2 style="margin-bottom: 20px; color: var(--fiap-white);">Escaneie o QR Code ou Digite o Código</h2>
+            
+            <div class="scanner-container">
+                <div id="qr-reader"></div>
+                <p style="color: var(--fiap-gray); margin-top: 15px; font-size: 14px;">
+                    Posicione o QR Code dentro da área de leitura
+                </p>
+            </div>
+            
+            <div class="manual-input">
+                <input type="text" id="manualCode" placeholder="Digite o código curto (ex: STU-ABC1234)" class="input-field">
+                <button onclick="validateManualCode()" class="btn-primary">
+                    <i class="fas fa-check"></i> Validar Código
+                </button>
+                <button onclick="clearResults()" class="btn-secondary">
+                    <i class="fas fa-refresh"></i> Limpar
+                </button>
+            </div>
+        </div>
+        
+        <!-- Results Section -->
+        <div id="resultsSection" class="hidden">
+            <!-- Results will be displayed here -->
+        </div>
+        
+        <!-- Stats Section -->
+        <div class="stats-section">
+            <h3 style="color: var(--fiap-white); margin-bottom: 15px;">📊 Estatísticas do Stand</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-value" id="totalValidated">0</div>
+                    <div class="stat-label">Validados</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="totalPending">0</div>
+                    <div class="stat-label">Pendentes</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="totalErrors">0</div>
+                    <div class="stat-label">Erros</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="totalBrindes">0</div>
+                    <div class="stat-label">Brindes</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Global state
+        const state = {
+            appSecret: 'FIAP_NEXT_2025_SECRET_KEY',
+            stats: {
+                validated: 0,
+                pending: 0,
+                errors: 0,
+                brindes: 0
+            },
+            validatedUsers: JSON.parse(localStorage.getItem('validatedUsers') || '[]')
+        };
+        
+        // Initialize QR Scanner
+        let qrScanner = null;
+        
+        function initializeScanner() {
+            qrScanner = new QrScanner(
+                document.getElementById('qr-reader'),
+                result => {
+                    console.log('QR Code detected:', result);
+                    validateQRCode(result);
+                },
+                {
+                    highlightScanRegion: true,
+                    highlightCodeOutline: true,
+                }
+            );
+            
+            qrScanner.start();
+        }
+        
+        // Validation functions
+        function validateQRCode(qrData) {
+            try {
+                const payload = JSON.parse(qrData);
+                validatePayload(payload);
+            } catch (error) {
+                showResult('error', 'QR Code inválido', 'O QR Code não contém dados válidos.');
+            }
+        }
+        
+        function validateManualCode() {
+            const code = document.getElementById('manualCode').value.trim();
+            if (!code) {
+                showResult('error', 'Código vazio', 'Digite um código para validar.');
+                return;
+            }
+            
+            // Parse short code
+            const parts = code.split('-');
+            if (parts.length !== 2) {
+                showResult('error', 'Formato inválido', 'Use o formato: ROLE-XXXXXXX');
+                return;
+            }
+            
+            const [role, randomPart] = parts;
+            const uid = `NEXT25-${code}`;
+            
+            // Create mock payload for manual validation
+            const payload = {
+                uid: uid,
+                role: role,
+                issued_at: new Date().toISOString(),
+                ver: "1",
+                sig: generateSignature(JSON.stringify({ uid, role, issued_at: new Date().toISOString(), ver: "1" }))
+            };
+            
+            validatePayload(payload);
+        }
+        
+        function validatePayload(payload) {
+            // Verify signature
+            if (!verifySignature(payload)) {
+                showResult('error', 'Assinatura inválida', 'O QR Code pode ter sido alterado ou é inválido.');
+                return;
+            }
+            
+            // Check if already validated
+            const alreadyValidated = state.validatedUsers.find(user => user.uid === payload.uid);
+            
+            if (alreadyValidated) {
+                showResult('warning', 'Já validado', `Este usuário já foi validado em ${new Date(alreadyValidated.validatedAt).toLocaleString('pt-BR')}.`);
+                return;
+            }
+            
+            // Validate user
+            const userData = {
+                uid: payload.uid,
+                role: payload.role,
+                validatedAt: new Date().toISOString(),
+                staffId: 'STAFF_001' // In real app, get from logged staff
+            };
+            
+            state.validatedUsers.push(userData);
+            localStorage.setItem('validatedUsers', JSON.stringify(state.validatedUsers));
+            
+            updateStats();
+            showResult('success', 'Validação bem-sucedida!', `Usuário ${payload.uid} validado com sucesso. Brinde liberado!`);
+            
+            // Clear manual input
+            document.getElementById('manualCode').value = '';
+        }
+        
+        function showResult(type, title, message) {
+            const resultsSection = document.getElementById('resultsSection');
+            resultsSection.className = `result-card result-${type}`;
+            resultsSection.classList.remove('hidden');
+            
+            const statusClass = type === 'success' ? 'status-validated' : 
+                              type === 'warning' ? 'status-pending' : 'status-error';
+            
+            resultsSection.innerHTML = `
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <div class="status-badge ${statusClass}">${type === 'success' ? 'Validado' : type === 'warning' ? 'Aviso' : 'Erro'}</div>
+                    <h3 style="color: var(--fiap-white); margin: 15px 0;">${title}</h3>
+                    <p style="color: var(--fiap-light-gray);">${message}</p>
+                </div>
+                
+                <div style="text-align: center;">
+                    <button onclick="clearResults()" class="btn-primary">
+                        <i class="fas fa-check"></i> Continuar
+                    </button>
+                </div>
+            `;
+            
+            // Auto-hide after 5 seconds for success
+            if (type === 'success') {
+                setTimeout(() => {
+                    resultsSection.classList.add('hidden');
+                }, 5000);
+            }
+        }
+        
+        function clearResults() {
+            document.getElementById('resultsSection').classList.add('hidden');
+        }
+        
+        function updateStats() {
+            state.stats.validated = state.validatedUsers.length;
+            state.stats.brindes = state.validatedUsers.length;
+            
+            document.getElementById('totalValidated').textContent = state.stats.validated;
+            document.getElementById('totalBrindes').textContent = state.stats.brindes;
+        }
+        
+        // Signature functions (same as main app)
+        function generateSignature(payload) {
+            const secret = state.appSecret;
+            let hash = 0;
+            for (let i = 0; i < payload.length; i++) {
+                const char = payload.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash;
+            }
+            return btoa(hash.toString() + secret).substring(0, 32);
+        }
+        
+        function verifySignature(payload) {
+            const { sig, ...payloadWithoutSig } = payload;
+            const expectedSig = generateSignature(JSON.stringify(payloadWithoutSig));
+            return expectedSig === sig;
+        }
+        
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeScanner();
+            updateStats();
+        });
+    </script>
+</body>
+</html>

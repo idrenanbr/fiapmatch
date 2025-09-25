@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>FIAP Match • Início</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#ED145B">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- External Resources -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/index.css">
+</head>
+<body>
+    <div class="card">
+        <h1><span style="color:var(--fiap-pink)">FIAP</span> Match</h1>
+        <p>Escolha para onde deseja ir:</p>
+        
+        <!-- Device Indicator (hidden by default, shown via JavaScript) -->
+        <div id="deviceIndicator" style="display:none; background:rgba(237,20,91,0.1); border:1px solid var(--fiap-pink); border-radius:8px; padding:8px 12px; margin-bottom:16px; font-size:12px; text-align:center;">
+            <i id="deviceIcon" class="fas fa-desktop"></i>
+            <span id="deviceText">Detectando dispositivo...</span>
+        </div>
+        
+        <div class="actions">
+            <button class="btn" onclick="openApp()"><i class="fas fa-rocket"></i> Abrir Aplicativo</button>
+            <button class="btn" onclick="openValidator()"><i class="fas fa-qrcode"></i> Validador do Stand</button>
+        </div>
+        <div class="hint">Dica: você pode favoritar esta página como atalho padrão.</div>
+    </div>
+
+    <script src="assets/js/index.js"></script>
+</body>
+</html>
+
+
