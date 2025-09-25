@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Converter SVG para PNG - FIAP Match</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1E1E1E 0%, #0D0D0D 100%);
+            color: white;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #ED145B;
+            margin-bottom: 30px;
+        }
+        
+        .converter {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 2px solid rgba(237,20,91,0.3);
+        }
+        
+        .svg-preview {
+            width: 100%;
+            max-width: 400px;
+            height: 210px;
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 10px;
+            margin: 20px auto;
+            display: block;
+        }
+        
+        .convert-btn {
+            background: linear-gradient(135deg, #ED145B, #FF4081);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            display: block;
+            margin: 20px auto;
+            transition: all 0.3s ease;
+        }
+        
+        .convert-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(237,20,91,0.4);
+        }
+        
+        .result {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .png-preview {
+            max-width: 400px;
+            height: 210px;
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 10px;
+            margin: 20px auto;
+            display: block;
+        }
+        
+        .download-btn {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .download-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(37,211,102,0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔄 Converter SVG para PNG - FIAP Match</h1>
+        
+        <div class="converter">
+            <h3>📘 Meta Style SVG</h3>
+            <img src="assets/img/fiap-match-meta-style.svg" alt="Meta Style SVG" class="svg-preview" id="svgPreview">
+            <button class="convert-btn" onclick="convertToPNG('meta')">🔄 Converter para PNG</button>
+            <div class="result" id="result"></div>
+        </div>
+        
+        <div class="converter">
+            <h3>🐦 X Style SVG</h3>
+            <img src="assets/img/fiap-match-x-style.svg" alt="X Style SVG" class="svg-preview" id="svgPreviewX">
+            <button class="convert-btn" onclick="convertToPNG('x')">🔄 Converter para PNG</button>
+            <div class="result" id="resultX"></div>
+        </div>
+        
+        <div class="converter">
+            <h3>💼 LinkedIn Style SVG</h3>
+            <img src="assets/img/fiap-match-linkedin-style.svg" alt="LinkedIn Style SVG" class="svg-preview" id="svgPreviewLinkedIn">
+            <button class="convert-btn" onclick="convertToPNG('linkedin')">🔄 Converter para PNG</button>
+            <div class="result" id="resultLinkedIn"></div>
+        </div>
+        
+        <div class="converter">
+            <h3>🎮 Discord Style SVG</h3>
+            <img src="assets/img/fiap-match-discord-style.svg" alt="Discord Style SVG" class="svg-preview" id="svgPreviewDiscord">
+            <button class="convert-btn" onclick="convertToPNG('discord')">🔄 Converter para PNG</button>
+            <div class="result" id="resultDiscord"></div>
+        </div>
+    </div>
+    
+    <script>
+        function convertToPNG(version) {
+            const svgFiles = {
+                'meta': 'assets/img/fiap-match-meta-style.svg',
+                'x': 'assets/img/fiap-match-x-style.svg',
+                'linkedin': 'assets/img/fiap-match-linkedin-style.svg',
+                'discord': 'assets/img/fiap-match-discord-style.svg'
+            };
+            
+            const resultIds = {
+                'meta': 'result',
+                'x': 'resultX',
+                'linkedin': 'resultLinkedIn',
+                'discord': 'resultDiscord'
+            };
+            
+            const resultDiv = document.getElementById(resultIds[version]);
+            resultDiv.innerHTML = '<p>🔄 Convertendo SVG para PNG...</p>';
+            
+            // Carregar SVG
+            fetch(svgFiles[version])
+                .then(response => response.text())
+                .then(svgText => {
+                    // Criar canvas
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    
+                    // Definir tamanho do canvas
+                    canvas.width = 1200;
+                    canvas.height = 630;
+                    
+                    // Criar imagem do SVG
+                    const img = new Image();
+                    const svgBlob = new Blob([svgText], {type: 'image/svg+xml'});
+                    const url = URL.createObjectURL(svgBlob);
+                    
+                    img.onload = function() {
+                        // Desenhar no canvas
+                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                        
+                        // Converter para PNG
+                        const pngDataUrl = canvas.toDataURL('image/png');
+                        
+                        // Mostrar resultado
+                        resultDiv.innerHTML = `
+                            <h4>✅ PNG Gerado com Sucesso!</h4>
+                            <img src="${pngDataUrl}" alt="PNG Preview" class="png-preview">
+                            <br>
+                            <button class="download-btn" onclick="downloadPNG('${pngDataUrl}', '${version}')">📥 Baixar PNG</button>
+                            <button class="download-btn" onclick="copyPNGUrl('${pngDataUrl}')">📋 Copiar URL</button>
+                        `;
+                        
+                        // Limpar URL
+                        URL.revokeObjectURL(url);
+                    };
+                    
+                    img.src = url;
+                })
+                .catch(error => {
+                    resultDiv.innerHTML = '<p>❌ Erro ao converter SVG: ' + error.message + '</p>';
+                });
+        }
+        
+        function downloadPNG(dataUrl, version) {
+            const link = document.createElement('a');
+            link.download = `fiap-match-${version}-style.png`;
+            link.href = dataUrl;
+            link.click();
+        }
+        
+        function copyPNGUrl(dataUrl) {
+            navigator.clipboard.writeText(dataUrl).then(() => {
+                alert('URL do PNG copiada para a área de transferência!');
+            });
+        }
+    </script>
+</body>
+</html>

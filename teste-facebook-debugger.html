@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Facebook Debugger - FIAP Match</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1E1E1E 0%, #0D0D0D 100%);
+            color: white;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #ED145B;
+            margin-bottom: 30px;
+        }
+        
+        .test-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 2px solid rgba(237,20,91,0.3);
+            text-align: center;
+        }
+        
+        .test-btn {
+            background: linear-gradient(135deg, #1877F2, #42A5F5);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .test-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(24,119,242,0.4);
+        }
+        
+        .instructions {
+            background: rgba(24,119,242,0.1);
+            border: 1px solid #1877F2;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        
+        .instructions h3 {
+            color: #1877F2;
+            margin-bottom: 15px;
+        }
+        
+        .instructions ol {
+            color: #E0E0E0;
+            line-height: 1.6;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
+        }
+        
+        .url-display {
+            background: rgba(0,0,0,0.5);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: #E0E0E0;
+            word-break: break-all;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📘 Teste Facebook Debugger - FIAP Match</h1>
+        
+        <div class="test-card">
+            <h3>🔧 Facebook Debugger</h3>
+            <p>Teste nossos SVGs diretamente no Facebook Debugger para ver se funcionam!</p>
+            
+            <div class="url-display">
+                https://developers.facebook.com/tools/debug/
+            </div>
+            
+            <button class="test-btn" onclick="openFacebookDebugger()">🚀 Abrir Facebook Debugger</button>
+        </div>
+        
+        <div class="test-card">
+            <h3>📱 URLs para Testar</h3>
+            <p>Cole estas URLs no Facebook Debugger:</p>
+            
+            <div class="url-display">
+                https://app.fiapmatch.com/assets/img/fiap-match-meta-style.svg
+            </div>
+            
+            <div class="url-display">
+                https://app.fiapmatch.com/assets/img/fiap-match-x-style.svg
+            </div>
+            
+            <div class="url-display">
+                https://app.fiapmatch.com/assets/img/fiap-match-linkedin-style.svg
+            </div>
+            
+            <div class="url-display">
+                https://app.fiapmatch.com/assets/img/fiap-match-discord-style.svg
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h3>📋 Como Usar o Facebook Debugger:</h3>
+            <ol>
+                <li><strong>Clique em "Abrir Facebook Debugger"</strong></li>
+                <li><strong>Cole uma das URLs</strong> dos nossos SVGs</li>
+                <li><strong>Clique em "Debug"</strong></li>
+                <li><strong>Veja se a imagem aparece</strong> no preview</li>
+                <li><strong>Se não aparecer:</strong> Clique em "Scrape Again"</li>
+                <li><strong>Teste no WhatsApp</strong> para ver se funciona</li>
+            </ol>
+            
+            <h3>🔧 Se não funcionar:</h3>
+            <ol>
+                <li><strong>Teste no OpenGraph.xyz</strong> primeiro</li>
+                <li><strong>Use PNG do OpenGraph.xyz</strong> que já funciona</li>
+                <li><strong>Ou converta nossos SVGs</strong> para PNG</li>
+            </ol>
+        </div>
+    </div>
+    
+    <script>
+        function openFacebookDebugger() {
+            window.open('https://developers.facebook.com/tools/debug/', '_blank');
+        }
+    </script>
+</body>
+</html>
