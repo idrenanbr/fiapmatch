@@ -115,45 +115,58 @@
 </head>
 <body>
     <div class="container">
-        <h1>🚀 Teste de SVGs - FIAP Match</h1>
+        <h1>🚀 Teste de SVGs - FIAP Match (Identidade Visual)</h1>
         
         <div class="svg-grid">
-            <!-- Versão 1: Tech Modern -->
+            <!-- Versão 1: Meta Style -->
             <div class="svg-card">
-                <h3>🎨 V1: Tech Modern</h3>
-                <p>Design escuro com animações, partículas e efeitos de rede. Ideal para redes sociais.</p>
+                <h3>📘 Meta Style</h3>
+                <p>Facebook/Instagram/WhatsApp - Cores azul, roxo, verde. Design moderno e gradientes.</p>
                 <div class="svg-preview">
-                    <img src="assets/img/fiap-match-v1-tech.svg" alt="FIAP Match Tech" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                    <img src="assets/img/fiap-match-meta-style.svg" alt="FIAP Match Meta" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
                 </div>
                 <div class="test-buttons">
-                    <button class="test-btn" onclick="testSVG('v1-tech')">Testar V1</button>
-                    <button class="test-btn" onclick="copyURL('v1-tech')">Copiar URL</button>
+                    <button class="test-btn" onclick="testSVG('meta-style')">Testar Meta</button>
+                    <button class="test-btn" onclick="copyURL('meta-style')">Copiar URL</button>
                 </div>
             </div>
             
-            <!-- Versão 2: Minimalista -->
+            <!-- Versão 2: X (Twitter) Style -->
             <div class="svg-card">
-                <h3>✨ V2: Minimalista</h3>
-                <p>Design limpo e elegante com fundo branco. Perfeito para apresentações e documentos.</p>
+                <h3>🐦 X (Twitter) Style</h3>
+                <p>Preto e branco minimalista. Design clean e tipografia forte. Estilo X/Twitter.</p>
                 <div class="svg-preview">
-                    <img src="assets/img/fiap-match-v2-minimal.svg" alt="FIAP Match Minimal" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                    <img src="assets/img/fiap-match-x-style.svg" alt="FIAP Match X" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
                 </div>
                 <div class="test-buttons">
-                    <button class="test-btn" onclick="testSVG('v2-minimal')">Testar V2</button>
-                    <button class="test-btn" onclick="copyURL('v2-minimal')">Copiar URL</button>
+                    <button class="test-btn" onclick="testSVG('x-style')">Testar X</button>
+                    <button class="test-btn" onclick="copyURL('x-style')">Copiar URL</button>
                 </div>
             </div>
             
-            <!-- Versão 3: Gamificado -->
+            <!-- Versão 3: LinkedIn Style -->
             <div class="svg-card">
-                <h3>🎮 V3: Gamificado</h3>
-                <p>Design vibrante com elementos de jogo, contadores dinâmicos e UI interativa.</p>
+                <h3>💼 LinkedIn Style</h3>
+                <p>Azul profissional, design corporativo. Ideal para networking e carreira.</p>
                 <div class="svg-preview">
-                    <img src="assets/img/fiap-match-v3-gamified.svg" alt="FIAP Match Gamified" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                    <img src="assets/img/fiap-match-linkedin-style.svg" alt="FIAP Match LinkedIn" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
                 </div>
                 <div class="test-buttons">
-                    <button class="test-btn" onclick="testSVG('v3-gamified')">Testar V3</button>
-                    <button class="test-btn" onclick="copyURL('v3-gamified')">Copiar URL</button>
+                    <button class="test-btn" onclick="testSVG('linkedin-style')">Testar LinkedIn</button>
+                    <button class="test-btn" onclick="copyURL('linkedin-style')">Copiar URL</button>
+                </div>
+            </div>
+            
+            <!-- Versão 4: Discord Style -->
+            <div class="svg-card">
+                <h3>🎮 Discord Style</h3>
+                <p>Roxo gamificado, design tech. Ideal para comunidades e gaming.</p>
+                <div class="svg-preview">
+                    <img src="assets/img/fiap-match-discord-style.svg" alt="FIAP Match Discord" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                </div>
+                <div class="test-buttons">
+                    <button class="test-btn" onclick="testSVG('discord-style')">Testar Discord</button>
+                    <button class="test-btn" onclick="copyURL('discord-style')">Copiar URL</button>
                 </div>
             </div>
         </div>
@@ -173,9 +186,10 @@
     <script>
         function testSVG(version) {
             const urls = {
-                'v1-tech': 'assets/img/fiap-match-v1-tech.svg',
-                'v2-minimal': 'assets/img/fiap-match-v2-minimal.svg',
-                'v3-gamified': 'assets/img/fiap-match-v3-gamified.svg'
+                'meta-style': 'assets/img/fiap-match-meta-style.svg',
+                'x-style': 'assets/img/fiap-match-x-style.svg',
+                'linkedin-style': 'assets/img/fiap-match-linkedin-style.svg',
+                'discord-style': 'assets/img/fiap-match-discord-style.svg'
             };
             
             window.open(urls[version], '_blank');
@@ -183,9 +197,10 @@
         
         function copyURL(version) {
             const urls = {
-                'v1-tech': 'https://app.fiapmatch.com/assets/img/fiap-match-v1-tech.svg',
-                'v2-minimal': 'https://app.fiapmatch.com/assets/img/fiap-match-v2-minimal.svg',
-                'v3-gamified': 'https://app.fiapmatch.com/assets/img/fiap-match-v3-gamified.svg'
+                'meta-style': 'https://app.fiapmatch.com/assets/img/fiap-match-meta-style.svg',
+                'x-style': 'https://app.fiapmatch.com/assets/img/fiap-match-x-style.svg',
+                'linkedin-style': 'https://app.fiapmatch.com/assets/img/fiap-match-linkedin-style.svg',
+                'discord-style': 'https://app.fiapmatch.com/assets/img/fiap-match-discord-style.svg'
             };
             
             navigator.clipboard.writeText(urls[version]).then(() => {
