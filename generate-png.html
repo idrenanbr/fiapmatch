@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gerar Imagem PNG - FIAP Match</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f0f0f0; }
+        canvas { border: 2px solid #333; margin: 20px 0; }
+        button { padding: 10px 20px; background: #ED145B; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #c01147; }
+    </style>
+</head>
+<body>
+    <h1>🎨 Gerador de Imagem PNG - FIAP Match</h1>
+    <p>Clique no botão abaixo para baixar a imagem PNG otimizada para redes sociais:</p>
+    
+    <canvas id="canvas" width="1200" height="630"></canvas>
+    <br>
+    <button onclick="downloadImage()">📥 Baixar PNG (1200x630)</button>
+    
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Background gradient
+        const gradient = ctx.createLinearGradient(0, 0, 1200, 630);
+        gradient.addColorStop(0, '#1E1E1E');
+        gradient.addColorStop(1, '#0D0D0D');
+        
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, 1200, 630);
+        
+        // Main card background
+        ctx.fillStyle = 'rgba(17, 24, 39, 0.9)';
+        ctx.strokeStyle = 'rgba(237, 20, 91, 0.4)';
+        ctx.lineWidth = 3;
+        ctx.roundRect(100, 100, 1000, 430, 25);
+        ctx.fill();
+        ctx.stroke();
+        
+        // Side accent bar
+        ctx.fillStyle = '#ED145B';
+        ctx.fillRect(100, 100, 25, 430);
+        
+        // Rocket emoji (large)
+        ctx.font = '120px Arial';
+        ctx.fillStyle = '#ED145B';
+        ctx.fillText('🚀', 180, 280);
+        
+        // FIAP text
+        ctx.font = 'bold 64px Arial';
+        ctx.fillStyle = '#ED145B';
+        ctx.fillText('FIAP', 350, 250);
+        
+        // MATCH text
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillText('MATCH', 580, 250);
+        
+        // Subtitle
+        ctx.font = '36px Arial';
+        ctx.fillStyle = '#D1D5DB';
+        ctx.fillText('Conectando Talentos, Criando Oportunidades', 350, 320);
+        
+        // Features
+        ctx.font = '24px Arial';
+        ctx.fillStyle = '#9CA3AF';
+        ctx.fillText('🎯 Conecte-se • 🏆 Ganhe pontos • 🎁 Concorra a prêmios', 350, 380);
+        
+        // URL
+        ctx.font = '20px Arial';
+        ctx.fillStyle = '#ED145B';
+        ctx.fillText('app.fiapmatch.com', 350, 450);
+        
+        // Decorative elements
+        ctx.strokeStyle = '#ED145B';
+        ctx.lineWidth = 4;
+        ctx.globalAlpha = 0.3;
+        ctx.beginPath();
+        ctx.arc(1050, 315, 80, 0, 2 * Math.PI);
+        ctx.stroke();
+        
+        // Small decorative dots
+        ctx.fillStyle = '#ED145B';
+        ctx.globalAlpha = 0.6;
+        ctx.beginPath();
+        ctx.arc(150, 150, 8, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(1050, 150, 6, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(150, 480, 10, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(1050, 480, 7, 0, 2 * Math.PI);
+        ctx.fill();
+        
+        function downloadImage() {
+            const link = document.createElement('a');
+            link.download = 'fiap-match-preview.png';
+            link.href = canvas.toDataURL('image/png', 1.0);
+            link.click();
+            alert('✅ Imagem baixada! Renomeie para "fiap-match-preview.png" e coloque na pasta assets/img/');
+        }
+        
+        // Polyfill for roundRect
+        if (!CanvasRenderingContext2D.prototype.roundRect) {
+            CanvasRenderingContext2D.prototype.roundRect = function(x, y, width, height, radius) {
+                this.beginPath();
+                this.moveTo(x + radius, y);
+                this.lineTo(x + width - radius, y);
+                this.quadraticCurveTo(x + width, y, x + width, y + radius);
+                this.lineTo(x + width, y + height - radius);
+                this.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+                this.lineTo(x + radius, y + height);
+                this.quadraticCurveTo(x, y + height, x, y + height - radius);
+                this.lineTo(x, y + radius);
+                this.quadraticCurveTo(x, y, x + radius, y);
+                this.closePath();
+            };
+        }
+    </script>
+</body>
+</html>
